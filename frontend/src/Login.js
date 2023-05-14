@@ -1,6 +1,8 @@
 import React from "react";
 import './style.css'
+import axios from 'axios'
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [error, setError] = useState('')
@@ -9,10 +11,21 @@ const Login = () => {
     password: ''
 })
 
+const navigate = useNavigate()
+
+
 const handleSubmit = (event) => {
   event.preventDefault();
+  axios.post('http://localhost:8081/login', values)
+  .then((res) => {
+    if(res.data.Status === 'Success'){
+      navigate('/')
+    }else{
+      setError(res.data.Error)
+    }
+  })
+  .catch((err) => console.log(err))
 }
-
 
   return (
     <div className='d-flex justify-content-center align-items-center vh-100 loginPage'>
@@ -33,7 +46,7 @@ const handleSubmit = (event) => {
                   onChange={e => setValues({...values, password: e.target.value})} className='form-control rounded-0' />
             </div>
             <button type='submit' className='btn btn-success w-100 rounded-0'> Log in</button>
-            <p>You are agree to aour terms and policies</p>
+            <p>You are agree to our terms and policies</p>
         </form>
     </div>
 </div>
