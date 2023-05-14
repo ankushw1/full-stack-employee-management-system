@@ -8,7 +8,8 @@ import Home from './Home'
 import AddEmployee from './AddEmployee'
 import EditEmployee from './EditEmployee'
 import Start from './Start'
-
+import EmployeeDetail from './EmployeeDetail'
+import EmployeeLogin from './EmployeeLogin'
 
 
 function App() {
